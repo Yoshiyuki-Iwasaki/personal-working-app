@@ -1,7 +1,32 @@
 import Head from "next/head";
-import Image from "next/image";
+import { useState } from "react";
+import styled from "styled-components";
+
+const Button = styled.button`
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
+  background: #fff;
+  border-radius: 50%;
+`;
 
 export default function Home() {
+  const [button, setButton] = useState(false);
+
+  const handleAttend = () => {
+    setButton(true);
+    console.log("出勤しました");
+  };
+
+  const handleLeaveWork = () => {
+    setButton(false);
+    console.log("退勤しました");
+  };
+
   return (
     <>
       <Head>
@@ -10,9 +35,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <button>出勤する</button>
-      </main>
+      {button ? (
+        <Button onClick={handleLeaveWork}>退勤する</Button>
+      ) : (
+        <Button onClick={handleAttend}>出勤する</Button>
+      )}
     </>
   );
 }
