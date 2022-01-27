@@ -1,6 +1,9 @@
 import Head from "next/head";
 import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
+import Layout from "../components/layout";
+import firebase from "../firebase/clientApp";
 
 const Button = styled.button`
   position: fixed;
@@ -16,6 +19,7 @@ const Button = styled.button`
 
 export default function Home() {
   const [button, setButton] = useState(false);
+  const [user, loading, error] = useAuthState(firebase.auth());
 
   const handleAttend = () => {
     setButton(true);
@@ -27,6 +31,9 @@ export default function Home() {
     console.log("退勤しました");
   };
 
+  if (loading) return loading;
+  if (error) return null;
+
   return (
     <>
       <Head>
@@ -35,11 +42,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {button ? (
-        <Button onClick={handleLeaveWork}>退勤する</Button>
-      ) : (
-        <Button onClick={handleAttend}>出勤する</Button>
-      )}
+      <Layout>
+        {user && <p>{user.displayName}</p>}
+        {button ? (
+          <Button onClick={handleLeaveWork}>退勤する</Button>
+        ) : (
+          <Button onClick={handleAttend}>出勤する</Button>
+        )}
+      </Layout>
     </>
   );
 }
