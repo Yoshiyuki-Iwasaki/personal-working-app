@@ -22,13 +22,19 @@ export default function Home() {
   const [user, loading, error] = useAuthState(firebase.auth());
 
   const handleAttend = () => {
-    setButton(true);
-    console.log("出勤しました");
+    const result = window.confirm("本当に出勤しますか？");
+    if (result) {
+      setButton(true);
+      console.log("出勤しました");
+    }
   };
 
   const handleLeaveWork = () => {
-    setButton(false);
-    console.log("退勤しました");
+    const result = window.confirm("本当に退勤しますか？");
+    if (result) {
+      setButton(false);
+      console.log("退勤しました");
+    }
   };
 
   if (loading) return loading;
