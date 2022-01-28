@@ -41,3 +41,7 @@ yarn.lock
 
 .firebase/
 .firebase
+
+
+# github
+/.github/
