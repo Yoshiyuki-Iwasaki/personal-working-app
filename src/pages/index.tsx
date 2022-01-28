@@ -18,22 +18,44 @@ const Button = styled.button`
 `;
 
 export default function Home() {
+  const db = firebase.firestore();
   const [button, setButton] = useState(false);
   const [user, loading, error] = useAuthState(firebase.auth());
+  const now = new Date();
 
-  const handleAttend = () => {
+  const handleAttend = async e => {
     const result = window.confirm("本当に出勤しますか？");
     if (result) {
       setButton(true);
       console.log("出勤しました");
+      e.preventDefault();
+      await db
+        .collection("time")
+        .doc(now.getFullYear() + "_" + now.getMonth() + 1 + "_" + now.getDate())
+        .collection(firebase.auth().currentUser.uid)
+        .add({
+          id: new Date().getTime(),
+          userId: firebase.auth().currentUser.uid,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
     }
   };
 
-  const handleLeaveWork = () => {
+  const handleLeaveWork = async e => {
     const result = window.confirm("本当に退勤しますか？");
     if (result) {
       setButton(false);
       console.log("退勤しました");
+      e.preventDefault();
+      await db
+        .collection("time")
+        .doc(now.getFullYear() + "_" + now.getMonth() + 1 + "_" + now.getDate())
+        .collection(firebase.auth().currentUser.uid)
+        .add({
+          id: new Date().getTime(),
+          userId: firebase.auth().currentUser.uid,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
     }
   };
 
