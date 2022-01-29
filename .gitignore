@@ -45,3 +45,7 @@ yarn.lock
 
 # github
 /.github/
+
+
+# storybook
+/.storybook/
