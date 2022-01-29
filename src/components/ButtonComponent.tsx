@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import firebase from "../firebase/clientApp";
 import { useState } from "react";
+import styled from "styled-components";
 
 const Button = styled.button`
   position: fixed;
@@ -14,7 +14,7 @@ const Button = styled.button`
   border-radius: 50%;
 `;
 
-const ButtonLayout = () => {
+const ButtonComponent = () => {
   const db = firebase.firestore();
   const [button, setButton] = useState(false);
   const now = new Date();
@@ -62,9 +62,8 @@ const ButtonLayout = () => {
       ) : (
         <Button onClick={handleAttend}>出勤する</Button>
       )}
-      ;
     </>
   );
 };
 
-export default ButtonLayout;
+export default ButtonComponent;

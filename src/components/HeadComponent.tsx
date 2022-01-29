@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const HeadLayout = () => {
+const HeadComponent = () => {
   return (
     <Head>
       <title>Create Next App</title>
@@ -10,4 +10,4 @@ const HeadLayout = () => {
   );
 };
 
-export default HeadLayout;
+export default HeadComponent;
