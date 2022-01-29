@@ -12,6 +12,8 @@ const Button = styled.button`
   box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
   background: #fff;
   border-radius: 50%;
+  font-size: 18px;
+  font-weight: 700;
 `;
 
 const ButtonComponent = () => {
