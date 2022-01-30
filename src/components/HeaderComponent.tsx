@@ -39,6 +39,13 @@ const Button = styled.button`
   }
 `;
 
+const UserName = styled.p`
+  margin-left: 30px;
+  font-size: 14px;
+  color: #333;
+  font-weight: 700;
+`;
+
 const TextLink = styled.a`
   margin-left: 30px;
   font-size: 14px;
@@ -59,12 +66,12 @@ const HeaderComponent = () => {
   return (
     <Header>
       <Link href="/">
-        <Logo>{user.displayName}</Logo>
+        <Logo>personal-working-app</Logo>
       </Link>
 
       <RightArea>
         <Button onClick={() => logout()}>ログアウト</Button>
-
+        <UserName>{user.displayName}</UserName>
         <Link href="/mypage">
           <TextLink>マイページ</TextLink>
         </Link>
